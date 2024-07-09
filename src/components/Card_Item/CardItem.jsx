@@ -56,6 +56,10 @@ export const CardItem = ({ data, BoardID }) => {
 
     dragRef(drop(ref));
 
+    const date = new Date()
+
+    const isActive = date < new Date(data.expCompTime)
+
     return <div className={stiles.CardItem} ref={ref} style={{ border: isOver ? "1px dashed gray" : "none", opacity: isDragging ? ".5" : "1" }}>
         <img src="./Menu.png" width={25} style={{ cursor: "grab" }} />
         <div>
@@ -65,7 +69,10 @@ export const CardItem = ({ data, BoardID }) => {
                 <span className={stiles.checkmark}></span>
             </label>
         </div>
-        <h3>{data.text}</h3>
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <h3>{data.text} </h3>
+            <p style={{ fontWeight: "800", color: isActive ? "green" : "red" }}>({isActive ? "Активка" : "Просрочена"})</p>
+        </div>
         <div className={stiles.btn_nav}>
             <img src="./Eye.png" onClick={() => { setIsOpen(true); setStatusCard("view") }} />
             <img src="./Edit.png" onClick={() => { setIsOpen(true); setStatusCard("edit") }} />

@@ -89,10 +89,12 @@ export const FormAddCard = ({ BoardID, setClose }) => {
         e.preventDefault()
         const dataForm = new FormData(AddCardFormRef.current)
 
+        let date = new Date()
+
         setCardList((prevCardList) => {
             const data = prevCardList.map((board) => {
                 if (board.id === BoardID) {
-                    return { ...board, items: [...board.items, { id: uuidv4(), text: dataForm.get("title"), status: false, Description: dataForm.get("text") }] };
+                    return { ...board, items: [...board.items, { id: uuidv4(), text: dataForm.get("title"), status: false, Description: dataForm.get("text"), dataCreation: date.toLocaleString(), expCompTime: dataForm.get("expCompTime") }] };
                 }
                 return board;
             });
@@ -118,6 +120,8 @@ export const FormAddCard = ({ BoardID, setClose }) => {
             name="text"
             style={{ border: "2px solid #4c81af", padding: "5px" }}
         ></textarea>
+
+        <input type="date" name="expCompTime" />
         <button type="submit" style={{ border: "2px solid #4c81af" }}>Добавить задачу</button>
     </form>
 
@@ -128,6 +132,7 @@ export const FormRenameCard = ({ BoardID, card, setClose }) => {
     const { setCardList } = useContext(ToDODataContext)
     const [valTitle, setValTitle] = useState(card.text || null)
     const [valDescription, setValDescription] = useState(card.Description || null)
+    const [ValExpCompTime, setValExpCompTime] = useState(card.expCompTime || null)
 
     const AddCardFormRef = useRef(null)
     const addNewCard = (e) => {
@@ -140,7 +145,7 @@ export const FormRenameCard = ({ BoardID, card, setClose }) => {
                     return {
                         ...board, items: board.items.map((item) => {
                             if (item.id === card.id) {
-                                return { ...item, text: dataForm.get("title"), Description: dataForm.get("text") }
+                                return { ...item, text: dataForm.get("title"), Description: dataForm.get("text"), expCompTime: dataForm.get("expCompTime") }
                             }
                             return item
                         })
@@ -174,7 +179,8 @@ export const FormRenameCard = ({ BoardID, card, setClose }) => {
             value={valDescription}
             style={{ border: "2px solid #4c81af", padding: "5px" }}
         ></textarea>
-        <br />
+        <label htmlFor="" >Ожидаемое время выполнения</label>
+        <input type="date" name="expCompTime" value={ValExpCompTime} onChange={(e) => setValExpCompTime(e.target.value)} />
         <button type="submit" style={{ border: "2px solid #4c81af" }}>Изменить задачу</button>
     </form>
 
@@ -353,6 +359,7 @@ export const FormCard = ({ open, setOpen, BoardID, status, Card }) => {
                 status == "create" ? <FormAddCard BoardID={BoardID} setClose={setOpen} /> :
                     status == "edit" ? <FormRenameCard BoardID={BoardID} card={Card} setClose={setOpen} /> :
                         <div className="add_form" style={{ display: "grid", gap: "5px", border: "none", padding: "5px" }}>
+                            <label htmlFor="">Дата создания: {Card.dataCreation}</label>
                             <label htmlFor="" >Название задачи</label>
                             <input readOnly value={Card.text} type="text" placeholder="Название задачи" name="title" className="input_add" style={{ border: "2px solid #4c81af" }} />
                             <label htmlFor="">Описание задачи</label>
@@ -362,8 +369,8 @@ export const FormCard = ({ open, setOpen, BoardID, status, Card }) => {
                                 name="text"
                                 style={{ border: "2px solid #4c81af", padding: "5px" }}
                             >{Card.Description}</textarea>
+                            <label htmlFor="">Ожидаемое время выполнение: {Card.expCompTime}</label>
                         </div>
-
             }
 
         </div>
@@ -427,6 +434,7 @@ export const FormBoard = ({ open, setOpen, status, Board }) => {
                     onChange={(e) => setBoardValue(e.target.value)}
                     value={status != "create" ? BoardValue : null}
                     style={{ border: "2px solid black", width: "100%", padding: "5px 10px", borderRadius: "15px" }} />
+
                 <button
                     type="submit"
                     style={{ border: "none", backgroundColor: "transparent", boxShadow: "0 0 6px 0 hsla(0, 0%, 0%, .4)", padding: "5px 10px", borderRadius: "15px", cursor: "pointer" }}

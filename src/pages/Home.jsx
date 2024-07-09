@@ -42,16 +42,17 @@ export const Home = () => {
 
             </header>
             <main className="main_container">
-                <div style={{ display: "flex", gap: "15px", alignItems: "center", marginTop: "15px", borderBottom: "3px solid #4c81af", padding: "5px 5px 10px" }}>
-                    <RemoveAll />
-                    <SearchForm />
-                </div>
+
                 {
                     Object.keys(UserData).length == 0 ? <div style={{ display: "grid", gridTemplateColumns: "auto auto", gap: "25px", marginTop: "25px" }}>
                         <button className="btn" onClick={() => setIsOpenFormAuth(true)}>Вход</button>
                         <button className="btn" onClick={() => setIsOpenFormRegister(true)}>Регистрация</button>
                     </div> :
                         <>
+                            <div style={{ display: "flex", gap: "15px", alignItems: "center", marginTop: "15px", borderBottom: "3px solid #4c81af", padding: "5px 5px 10px" }}>
+                                <RemoveAll />
+                                <SearchForm />
+                            </div>
                             <nav style={{ display: "grid", gridTemplateColumns: "50% 50%" }}>
                                 {/* <button className="btn_add" onClick={() => { setIsOpenFormBoard(true); setFormBoardStatus("create") }}>
                                     <img src="./Add.png" alt="Add" />
