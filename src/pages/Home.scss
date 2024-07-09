@@ -10,13 +10,28 @@ html {
 
     padding: 15px 25px;
     display: grid;
-    grid-template-columns: 50px auto 100px;
+    grid-template-columns: 50px auto auto;
     align-items: center;
     gap: 15px;
     background-color: #6ebbff;
     margin-bottom: 5px;
     box-shadow: 0 0 6px 0 hsla(0, 0%, 0%, .8),
 
+}
+
+.btn {
+    border: none;
+    background-color: #4c81af;
+    color: aliceblue;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: all .5s;
+
+    &:hover {
+        background-color: hsla(208, 39%, 49%, .7);
+    }
 }
 
 .btn_remove_all {
@@ -133,37 +148,28 @@ html {
     gap: 15px;
 }
 
-.Card {
-
-    // padding: 5px 15px;
-    border: 2px solid black;
-    margin: 5px 15px;
-    width: 80%;
-    height: 80px;
-    text-align: center;
+.btn_add_board {
+    border: none;
+    outline: 2px solid aliceblue;
+    outline-offset: -5px;
+    background-color: #4c81af;
+    box-shadow: 0 0 10px 0 hsla(0, 0%, 0%, .4);
     border-radius: 15px;
-    background-color: white;
-    position: relative;
-    overflow: hidden;
+    padding: 5px 15px;
+    font-size: 25px;
+    font-weight: 700;
+    color: aliceblue;
+    cursor: pointer;
+    transition: all .5s;
 
-    display: grid;
-    grid-template-columns: auto;
-    align-items: center;
-
-}
-
-.card_Info {
-
-    padding: 0px 15px;
-    display: grid;
-    grid-template-columns: 25px auto 100px;
-    align-items: center;
-
-    & h1 {
-        font-size: 25px;
-        user-select: none;
+    &:hover {
+        transform: scale(1.01);
+        outline-offset: 5px;
+        outline-color: #4c81af;
     }
+
 }
+
 
 .card_drop {
 
