@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/ToDoList/",
   server: {
     proxy: {
-      '/api': 'http://192.168.0.103:5000'
+      '/api': 'https://todolistserver-9yzt.onrender.com'
     }
   },
 })
