@@ -34,22 +34,26 @@ export const DataToDoList = ({ children }) => {
 
     useEffect(() => {
         sessionStorage.setItem("data", JSON.stringify(cardList))
-        const ID = UserData.Id
+
         setIsSave(false)
-        const { data } = axios({
-            method: "put",
-            url: "https://todolistserver-9yzt.onrender.com/api/TaskList",
-            params: {
-                User_Id: ID,
-                datas: JSON.stringify(cardList)
-            },
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        if (cardList.lenght !== 0) {
+            const ID = UserData.Id
+            const { data } = axios({
+                method: "put",
+                url: "https://todolistserver-9yzt.onrender.com/api/TaskList",
+                params: {
+                    User_Id: ID,
+                    datas: JSON.stringify(cardList)
+                },
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            if (data) {
+                setIsSave(data.status)
             }
-        })
-        if (data) {
-            setIsSave(data.status)
         }
+
 
 
     }, [cardList])

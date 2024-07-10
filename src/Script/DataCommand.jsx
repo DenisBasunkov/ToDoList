@@ -216,7 +216,7 @@ export const Auth = ({ open, setOpen }) => {
         const formData = new FormData(formRef.current)
         const { data } = await axios({
             method: "get",
-            url: "https://dashboard.render.com/web/srv-cq6sr1g8fa8c73809tr0/api/User",
+            url: "https://todolistserver-9yzt.onrender.com/api/User",
             params: {
                 Login: formData.get("Login"),
                 Password: formData.get("Password")
@@ -282,7 +282,7 @@ export const Registr = ({ open, setOpen }) => {
         const formData = new FormData(formRef.current)
         const { data } = await axios({
             method: "put",
-            url: "https://dashboard.render.com/web/srv-cq6sr1g8fa8c73809tr0/api/User",
+            url: "https://todolistserver-9yzt.onrender.com/api/User",
             params: {
                 Login: formData.get("Login"),
                 Password: formData.get("Password"),
