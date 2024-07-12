@@ -274,6 +274,7 @@ export const Registr = ({ open, setOpen }) => {
     const { setCardList, setUserData } = useContext(ToDODataContext)
 
     const Close = () => {
+        formRef.current.reset()
         setOpen(false)
     }
 
@@ -290,11 +291,12 @@ export const Registr = ({ open, setOpen }) => {
             }
         })
         if (data.status) {
+
             setUserData(data.dataUSER)
             sessionStorage.setItem("UserData", JSON.stringify(data.dataUSER))
             setCardList(JSON.stringify(JSON.parse(data.data)))
             sessionStorage.setItem("data", JSON.stringify(JSON.parse(data.data)))
-            formRef.current.reset()
+            location.reload()
             Close()
         }
     }
